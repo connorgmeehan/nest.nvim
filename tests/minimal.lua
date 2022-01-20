@@ -46,7 +46,13 @@ require("nvim-mapper").setup({
 local nest = require('nest')
 nest.enable(require('nest.integrations.whichkey'));
 nest.enable(require('nest.integrations.mapper'))
-nest.enable(require('nest.integrations.example'))
+local md_table = require('nest.integrations.md_table')
+nest.enable(md_table)
+md_table.set_table_fields({ 
+  {key = 'lhs', name = 'Keybind'},
+  {key = 3, name = 'Name'},
+  {key = 'uid', name = 'Mapper ID'},
+})
 
 --- For testing keymaps bound to buffer
 local apply_buffer_keymaps = function ()
@@ -119,3 +125,4 @@ nest.applyKeymaps {
     { 'H', '^', mode = 'nv' },
 }
 
+md_table.print_markdown()
